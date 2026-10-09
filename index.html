@@ -14,8 +14,8 @@ connect-src 'self'; manifest-src 'self'; font-src 'none'; frame-src 'none'; obje
     <link rel="apple-touch-icon" sizes="180x180" href="/stundenplan/assets/apple-touch-icon-Dw4c1WCj.png" />
     <meta name="apple-mobile-web-app-title" content="Stundenplan" />
     <link rel="manifest" href="/stundenplan/assets/site-jbjI-hHQ.webmanifest" />
-  <script type="module" crossorigin src="/stundenplan/assets/index-CP6Wdbnm.js"></script>
-  <link rel="stylesheet" crossorigin href="/stundenplan/assets/index-BSGP2eeg.css">
+  <script type="module" crossorigin src="/stundenplan/assets/index-DytVLsh1.js"></script>
+  <link rel="stylesheet" crossorigin href="/stundenplan/assets/index-CcLrtRvu.css">
 </head>
 
 <body>
@@ -27,6 +27,8 @@ connect-src 'self'; manifest-src 'self'; font-src 'none'; frame-src 'none'; obje
             <div class="password-gate-field">
                 <input type="password" id="password-gate-input" class="password-gate-input" name="password"
                     placeholder="Passwort" autocomplete="current-password" required autofocus>
+                <!-- Eye button: toggles between hidden (dots) and plain-text password.
+                     State lives in aria-pressed; the icon swap is done purely by CSS. -->
                 <button type="button" id="password-gate-toggle" class="password-gate-toggle"
                     aria-label="Passwort anzeigen" aria-pressed="false">
                     <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -166,6 +168,14 @@ connect-src 'self'; manifest-src 'self'; font-src 'none'; frame-src 'none'; obje
                     </div>
                 </div>
 
+                <!-- ═══════════════════════════════════════════════════════════
+                     PRINT SHEET (A4 form)
+                     Everything below is hidden on screen (.print-only) and
+                     arranged by style.css, section 17. Dynamic parts — title,
+                     name, module list, date — are filled by js/print.js.
+                     The schedule grid above is part of the printout too.
+                     ═══════════════════════════════════════════════════════════ -->
+
                 <section id="print-header" class="print-only">
                     <img class="print-logo" src="/stundenplan/assets/logo-_DUGwi6G.svg" alt="">
                     <h1 id="print-title" class="print-title"></h1>
@@ -186,6 +196,13 @@ connect-src 'self'; manifest-src 'self'; font-src 'none'; frame-src 'none'; obje
                     <ul id="print-modules"></ul>
                 </section>
 
+                <!-- The note at the bottom is a footnote to the second checkbox (marked with *).
+                     The checkbox texts and the note are justified. The &shy; entities in them are
+                     soft hyphens: invisible unless a line breaks there. They back up the CSS
+                     `hyphens: auto` so justified text never shows large gaps, even without a
+                     German hyphenation dictionary.
+                     Always write them as &shy; — never paste invisible characters such as the
+                     zero-width non-joiner (U+200C) into these texts. -->
                 <section id="print-religion" class="print-only print-box">
                     <h3 class="print-heading">Mein Religionsbekenntnis:</h3>
                     <div class="print-write-line"></div>
